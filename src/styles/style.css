@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  color: whitesmoke;
+  user-select: none;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-image: radial-gradient(#7d19cf, #2a0050);
+}
+
+.points, .game, .right-container {
+  margin: 0 50px;
+}
+
+canvas {
+  background-color: #000;
+}
+
+#next-tetromino {
+  border-radius: 15px;
+  border: 2px solid #f3f3f3;
+  overflow: hidden;
+}
+
+.right-container h1, .right-container canvas {
+  padding: 10px;
+}
