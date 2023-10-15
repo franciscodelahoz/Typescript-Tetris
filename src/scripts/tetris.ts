@@ -60,8 +60,10 @@ export class Tetris {
 
   public gameLoop(): void {
     if (this.gameController.isGameOver) {
-      window.alert(gameOverMessage);
-      this.resetGame();
+      if (window.confirm(gameOverMessage)) {
+        this.resetGame();
+      }
+
       return;
     }
 
