@@ -75,3 +75,5 @@ export const tetrominoMovementsDirectionsMap: Record<MovementDirection, { rows: 
   [MovementDirection.RIGHT]: { rows: 0, columns: 1 },
   [MovementDirection.DOWN] : { rows: 1, columns: 0 },
 };
+
+export const gameOverMessage = 'Game Over';

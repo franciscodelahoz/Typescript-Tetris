@@ -49,4 +49,10 @@ export class TetrominoQueue {
     this.currentTetromino = this.generateRandomTetromino();
     return nextTetrominoInQueue;
   }
+
+  public resetQueue(): void {
+    this.tetrominoList.push(...this.usedTetrominoList);
+    this.usedTetrominoList = [];
+    this.currentTetromino = this.generateRandomTetromino();
+  }
 }

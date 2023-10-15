@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: whitesmoke;
   user-select: none;
 }
@@ -32,4 +32,20 @@ canvas {
 
 .right-container h1, .right-container canvas {
   padding: 10px;
+}
+
+#start-button {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.80);
+  width: 100vw;
+  height: 100hw;
+  top: 0;
+  inset: 0;
+  display: grid;
+  font-size: 48px;
+  place-content: center;
+}
+
+#start-button:hover {
+  cursor: pointer;
 }

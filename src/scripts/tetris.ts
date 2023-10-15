@@ -1,5 +1,10 @@
 import { GameController } from './game-controller';
-import { MovementDirection, gridColumns, gridRows } from './constants/general.constants';
+import {
+  MovementDirection,
+  gameOverMessage,
+  gridColumns,
+  gridRows
+} from './constants/general.constants';
 import { Grid } from './grid';
 import { TetrominoQueue } from './tetromino-queue';
 import { GameView } from './components/ui/game-view';
@@ -55,6 +60,8 @@ export class Tetris {
 
   public gameLoop(): void {
     if (this.gameController.isGameOver) {
+      window.alert(gameOverMessage);
+      this.resetGame();
       return;
     }
 
@@ -64,5 +71,14 @@ export class Tetris {
     setTimeout(() => {
       this.gameLoop();
     }, 500);
+  }
+
+  public startGame(): void {
+    this.gameLoop();
+  }
+
+  public resetGame(): void {
+    this.gameController.resetGame();
+    this.gameLoop();
   }
 }

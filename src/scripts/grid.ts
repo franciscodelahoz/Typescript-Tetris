@@ -59,4 +59,8 @@ export class Grid {
   get getColumnCount(): number {
     return this.columns;
   }
+
+  public clearGrid(): void {
+    this.grid = Array.from({ length: this.rows }, () => new Array<number>(this.columns).fill(0));
+  }
 }

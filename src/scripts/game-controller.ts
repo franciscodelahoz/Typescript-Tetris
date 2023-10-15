@@ -243,4 +243,12 @@ export class GameController {
     this.drawTetromino();
     this.drawStoredTetrominosInGrid();
   }
+
+  public resetGame(): void {
+    this.grid.clearGrid();
+    this.blockQueue.resetQueue();
+    this.currentTetromino = this.blockQueue.getNextTetromino();
+    this.isGameOver = false;
+    this.score.resetScore();
+  }
 }
