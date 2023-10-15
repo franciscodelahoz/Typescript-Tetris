@@ -5,8 +5,6 @@ import {
   MovementDirection,
   TetrominoBlockType,
   displayScale,
-  firstGridRow,
-  secondGridRow,
   tetrominoMovementsDirectionsMap
 } from './constants/general.constants';
 import { BlockPosition } from './types/tetromino';
@@ -49,7 +47,7 @@ export class GameController {
     const currentTetrominoBlocksPositions = this.currentTetromino.getCurrentBlocksPositions();
 
     for (let position of currentTetrominoBlocksPositions) {
-      if (!this.grid.isValidAndEmptyCell(position.row, position.column)) {
+      if (position.row >= 0 && !this.grid.isValidAndEmptyCell(position.row, position.column)) {
         return false;
       }
     }
@@ -70,7 +68,10 @@ export class GameController {
   }
 
   private checkGameOverConditions(): boolean {
-    return !(this.grid.isEmptyRow(firstGridRow) && this.grid.isEmptyRow(secondGridRow));
+    return this.currentTetromino.getCurrentBlocksPositions().some((position) => (
+      position.row === 0 &&
+      !this.grid.isValidAndEmptyCell(position.row, position.column)
+    ));
   }
 
   private setScore(numRowsCleared: number) {
@@ -104,7 +105,7 @@ export class GameController {
   private calculateDistanceFromNearestBottomBlock(position: BlockPosition): number {
     let distance = 0;
 
-    while (this.grid.isValidAndEmptyCell(position.row + distance, position.column)) {
+    while (this.grid.isEmptyCell(position.row + distance, position.column)) {
       distance += 1;
     }
 
@@ -125,7 +126,9 @@ export class GameController {
     const currentTetrominoBlocksPositions = this.currentTetromino.getCurrentBlocksPositions();
 
     for (let position of currentTetrominoBlocksPositions) {
-      this.grid.setCellValue(position.row, position.column, this.currentTetromino.tetrominoId);
+      if (this.grid.isValidCell(position.row, position.column)) {
+        this.grid.setCellValue(position.row, position.column, this.currentTetromino.tetrominoId);
+      }
     }
 
     this.currentTetromino.resetPosition();
@@ -133,10 +136,11 @@ export class GameController {
     const clearedRows = this.clearCompletedRows();
     this.setScore(clearedRows);
 
+    this.currentTetromino = this.blockQueue.getNextTetromino();
+
     if (this.checkGameOverConditions()) {
       this.isGameOver = true;
-    } else {
-      this.currentTetromino = this.blockQueue.getNextTetromino();
+      this.currentTetromino.move(-1, 0)
     }
   }
 
@@ -201,7 +205,7 @@ export class GameController {
 
   private drawNextTetrominoCentered() {
     const nextTetromino = this.blockQueue.currentTetromino;
-    const nextTetrominoBlocksPositions = nextTetromino.getTileLocations(0);
+    const nextTetrominoBlocksPositions = nextTetromino.getInitialTetrominoShape();
 
     // Calculate the number of rows and columns occupied by the tetromino
     const maxRow = Math.max(...nextTetrominoBlocksPositions.map(block => block.row));

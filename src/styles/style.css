@@ -13,7 +13,7 @@ main {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: radial-gradient(#7d19cf, #2a0050);
+  background-image: radial-gradient(#1983cf, #000b50);
 }
 
 .points, .game, .right-container {

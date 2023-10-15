@@ -40,6 +40,18 @@ export class Grid {
     this.grid[row][column] = value;
   }
 
+  public isValidCell(row: number, column: number): boolean {
+    return this.isPositionWithinGridBounds(row, column);
+  }
+
+  public isEmptyCell = (row: number, column: number): boolean => {
+    if (row < 0) {
+      return true;
+    }
+
+    return this.grid[row]?.[column] === 0;
+  }
+
   get getGrid(): number[][] {
     return this.grid;
   }

@@ -51,7 +51,7 @@ export abstract class Tetromino {
     this.currentTetrominoPosition.column = this.initialTetrominoPosition.column;
   }
 
-  public getTileLocations(index: number): BlockPosition[] {
-    return this.tetrominoBlockPositions[index];
+  public getInitialTetrominoShape(): BlockPosition[] {
+    return this.tetrominoBlockPositions[0];
   }
 }
